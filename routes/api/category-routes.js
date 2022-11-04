@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
       res.status(200).json(categoryData);
       return;
     }
-    res.status(404).json('Category Error.')
+    res.status(404).json('Category Error')
 
   }catch(err){
     res.status(500).json(err);
@@ -61,7 +61,7 @@ router.put('/:id', async (req, res) => {
       res.status(200).json(updateCategoryId);
       return;
     }
-    res.status(404).json('Category ID Error.')
+    res.status(404).json('Category ID Error')
     }catch(err){
       res.status(500).json(err)
     }
@@ -80,7 +80,7 @@ router.delete('/:id', async (req, res) => {
       res.status(200).json(deleteCategory);
       return;
     }
-    res.status(404).json('Category with ID Error.')
+    res.status(404).json('Category with ID Error')
   }catch(err){
     res.status(500).json(err)
   }
