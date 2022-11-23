@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
       res.status(200).json(categoryData);
       return;
     }
-    res.status(404).json('Category Error')
+    res.status(404).json('GET Category by id error')
 
   }catch(err){
     res.status(500).json(err);
@@ -61,7 +61,7 @@ router.put('/:id', async (req, res) => {
       res.status(200).json(updateCategoryId);
       return;
     }
-    res.status(404).json('Category ID Error')
+    res.status(404).json('PUT Category error')
     }catch(err){
       res.status(500).json(err)
     }
@@ -71,16 +71,16 @@ router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
   try{
     const deleteCategory = await Category.findOne({
-        where: {
-          id: req.params.id,
-        },
+      where: {
+        id: req.params.id,
+      },
     });
     if(deleteCategory){
       await deleteCategory.destroy();
       res.status(200).json(deleteCategory);
       return;
     }
-    res.status(404).json('Category with ID Error')
+    res.status(404).json('DELETE Category error')
   }catch(err){
     res.status(500).json(err)
   }

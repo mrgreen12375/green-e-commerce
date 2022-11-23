@@ -34,7 +34,7 @@ router.get('/:id', async (req, res) => {
       res.status(200).json(tagData);
       return;
     }
-    res.status(404).json('Tag Error')
+    res.status(404).json('GET Tag by id error')
 
   } catch (err) {
     res.status(500).json(err)
@@ -56,7 +56,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
   try {
-    let updatedTagId = await Tag.update({
+    let updateTagId = await Tag.update({
       tag_name: req.body.tag_name
     }, 
     {
@@ -65,30 +65,31 @@ router.put('/:id', async (req, res) => {
       }
     })
 
-    if (updatedTagId) {
-      res.status(200).json(updatedTagId);
+    if (updateTagId) {
+      res.status(200).json(updateTagId);
       return;
     }
-    res.status(404).json('Tag ID Error')
+    res.status(404).json('PUT Tag error')
   }
   catch (err) {
     res.status(500).json(err)
   }
 });
 
-router.delete('/:id',  (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value
   try{
-    const deleteTag = Tag.destroy({
+    const deleteTag = await Tag.findOne({
       where:{
         id: req.params.id
       }
     })
     if(deleteTag){
+      await deleteTag.destroy();
       res.status(200).json(deleteTag);
       return;
     }
-    res.status(404).json('Tag with ID Error')
+    res.status(404).json('DELETE Tag error')
   }catch(err){
     res.status(500).json(err)
   }
